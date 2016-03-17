@@ -38,6 +38,18 @@ Hello [World](/a "foo").
 ~~~~~~
 <p><a href="/"><em>a</em></a></p>
 
+>> Headings
+# One
+## Two
+#### Four
+~~~~~~
+<h1>One</h1><h2>Two</h2><h4>Four</h4>
+
+>> Blockquote
+> One
+~~~~~~
+<blockquote><p>One</p></blockquote>
+
 >> Ordered list
 An ordered list:
 
@@ -45,3 +57,31 @@ An ordered list:
 2. Two
 ~~~~~~
 <p>An ordered list:</p><ol><li><p>One</p></li><li><p>Two</p></li></ol>
+
+>> Code Block
+A code block:
+
+    let foo = 1;
+~~~~~~
+<p>A code block:</p><pre>let foo = 1;</pre>
+
+>> Fenced Code Block
+A code block:
+```
+let foo = 1;
+```
+~~~~~~
+<p>A code block:</p><pre>let foo = 1;</pre>
+
+>> Fenced Code Block with lang
+A code block:
+```js
+let foo = 1;
+```
+~~~~~~
+<p>A code block:</p><pre lang="js">let foo = 1;</pre>
+
+>> Inline code
+Example: `let foo = 1;`
+~~~~~~
+<p>Example: <code>let foo = 1;</code></p>

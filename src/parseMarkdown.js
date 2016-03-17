@@ -18,6 +18,7 @@ const defaults = {
 type ASTNode = {
   type: string;
   value: ?string;
+  depth: ?number;
   children: ?Array<ASTNode>;
 };
 type StringMap = {[key: string]: any};
@@ -35,6 +36,24 @@ function getLinkAttrs(node: ASTNode): KeyValueArray {
   return attrs;
 }
 
+function getImageAttrs(node: ASTNode): KeyValueArray {
+  let attrs = [];
+  if (node.url != null) {
+    attrs.push(['src', node.url]);
+  }
+  if (node.title != null) {
+    attrs.push(['title', node.title]);
+  }
+  if (node.alt != null) {
+    attrs.push(['alt', node.alt]);
+  }
+  return attrs;
+}
+
+function getCodeBlockAttrs(node: ASTNode): KeyValueArray {
+  return (node.lang == null) ? [] : [['lang', node.lang]];
+}
+
 function parseNode(node: ASTNode): ElementDescriptor {
   switch (node.type) {
     case 'root': {
@@ -42,6 +61,17 @@ function parseNode(node: ASTNode): ElementDescriptor {
     }
     case 'paragraph': {
       return ['p'];
+    }
+    case 'blockquote': {
+      return ['blockquote'];
+    }
+    case 'heading': {
+      // This is to make Flow happy.
+      let depth = (node.depth == null) ? '' : node.depth.toString();
+      return ['h' + depth];
+    }
+    case 'code': {
+      return ['pre', getCodeBlockAttrs(node)];
     }
     case 'list': {
       let tagName = node.ordered ? 'ol' : 'ul';
@@ -60,8 +90,14 @@ function parseNode(node: ASTNode): ElementDescriptor {
     case 'emphasis': {
       return ['em'];
     }
+    case 'inlineCode': {
+      return ['code'];
+    }
     case 'link': {
       return ['a', getLinkAttrs(node)];
+    }
+    case 'image': {
+      return ['img', getImageAttrs(node)];
     }
     default: {
       return ['span'];
@@ -73,7 +109,12 @@ function processNode(node: ASTNode): Node {
   if (node.type === 'text') {
     return new TextNode(node.value);
   }
-  let childNodes = node.children ? node.children.map(processNode) : [];
+  let childNodes;
+  if (typeof node.value === 'string') {
+    childNodes = [new TextNode(node.value)];
+  } else {
+    childNodes = node.children ? node.children.map(processNode) : [];
+  }
   let [tagName, attrs] = parseNode(node);
   return new ElementNode(tagName, attrs, childNodes);
 }
