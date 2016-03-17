@@ -28,10 +28,10 @@ Hello [World](/a "foo").
 ~~~~~~
 <p>Hello <a href="/a" title="foo">World</a>.</p>
 
->> Link with escaped title
-Hello [World](/a "f\"oo").
-~~~~~~
-<p>Hello <a href="/a" title="f\&quot;oo">World</a>.</p>
+// >> Link with escaped title
+// Hello [World](/a "f\"oo").
+// ~~~~~~
+// <p>Hello <a href="/a" title="f\&quot;oo">World</a>.</p>
 
 >> Link with inline style
 [_a_](/)

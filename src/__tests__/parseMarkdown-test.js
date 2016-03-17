@@ -15,8 +15,10 @@ let testCasesRaw = fs.readFileSync(
   'utf8',
 );
 
+testCasesRaw = testCasesRaw.split('\n').filter((l) => !l.startsWith('// ')).join('\n');
+
 let testCases = testCasesRaw.slice(2).trim().split(SEP).map((text) => {
-  let lines = text.split('\n');
+  let lines = text.trim().split('\n');
   let description = lines.shift().trim();
   let index = lines.indexOf(DIV);
   let markdown = lines.slice(0, index).join('\n');
@@ -40,7 +42,6 @@ describe('parseMarkdown', () => {
     it(`should render ${description}`, () => {
       let element = parseMarkdown(markdown);
       let actualHTML = element.toString().slice(5, -6);
-      console.log(actualHTML);
       expect(actualHTML).toBe(html);
     });
   });
