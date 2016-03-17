@@ -31,8 +31,8 @@ describe('parseMarkdown', () => {
     let markdown = 'Hello World';
     let element = parseMarkdown(markdown);
     expect(element.nodeType).toBe(NODE_TYPE_ELEMENT);
-    let html = element.toString().slice(5, -6);
-    expect(html).toBe('<p>Hello World</p>');
+    let html = element.toString();
+    expect(html).toBe('<div><p>Hello World</p></div>');
   });
 });
 

@@ -22,6 +22,7 @@ type ASTNode = {
 };
 type StringMap = {[key: string]: any};
 type KeyValueArray = Array<[string, ?string]>
+type ElementDescriptor = [string, ?KeyValueArray]
 
 function getLinkAttrs(node: ASTNode): KeyValueArray {
   let attrs = [];
@@ -34,36 +35,36 @@ function getLinkAttrs(node: ASTNode): KeyValueArray {
   return attrs;
 }
 
-function getElement(node: ASTNode, childNodes: Array<Node>): ElementNode {
+function parseNode(node: ASTNode): ElementDescriptor {
   switch (node.type) {
     case 'root': {
-      return new ElementNode('div', null, childNodes);
+      return ['div'];
     }
     case 'paragraph': {
-      return new ElementNode('p', null, childNodes);
+      return ['p'];
     }
     case 'list': {
       let tagName = node.ordered ? 'ol' : 'ul';
-      return new ElementNode(tagName, null, childNodes);
+      return [tagName];
     }
     case 'listItem': {
-      return new ElementNode('li', null, childNodes);
+      return ['li'];
     }
     case 'thematicBreak': {
-      return new ElementNode('hr');
+      return ['hr'];
     }
     // inline
     case 'strong': {
-      return new ElementNode('strong', null, childNodes);
+      return ['strong'];
     }
     case 'emphasis': {
-      return new ElementNode('em', null, childNodes);
+      return ['em'];
     }
     case 'link': {
-      return new ElementNode('a', getLinkAttrs(node), childNodes);
+      return ['a', getLinkAttrs(node)];
     }
     default: {
-      return new ElementNode('span', null, childNodes);
+      return ['span'];
     }
   }
 }
@@ -73,7 +74,8 @@ function processNode(node: ASTNode): Node {
     return new TextNode(node.value);
   }
   let childNodes = node.children ? node.children.map(processNode) : [];
-  return getElement(node, childNodes);
+  let [tagName, attrs] = parseNode(node);
+  return new ElementNode(tagName, attrs, childNodes);
 }
 
 export default function parseMarkdown(markdown: string, opts: ?StringMap): ElementNode {
