@@ -63,7 +63,7 @@ A code block:
 
     let foo = 1;
 ~~~~~~
-<p>A code block:</p><pre>let foo = 1;</pre>
+<p>A code block:</p><pre><code>let foo = 1;</code></pre>
 
 >> Fenced Code Block
 A code block:
@@ -71,7 +71,7 @@ A code block:
 let foo = 1;
 ```
 ~~~~~~
-<p>A code block:</p><pre>let foo = 1;</pre>
+<p>A code block:</p><pre><code>let foo = 1;</code></pre>
 
 >> Fenced Code Block with lang
 A code block:
@@ -79,7 +79,7 @@ A code block:
 let foo = 1;
 ```
 ~~~~~~
-<p>A code block:</p><pre lang="js">let foo = 1;</pre>
+<p>A code block:</p><pre lang="js"><code>let foo = 1;</code></pre>
 
 >> Inline code
 Example: `let foo = 1;`
