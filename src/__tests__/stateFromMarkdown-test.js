@@ -18,7 +18,7 @@ describe('stateFromMarkdown', () => {
 
 function removeKeys(blocks) {
   return blocks.map((block) => {
-    let {key, ...other} = block;
+    let {key, ...other} = block; // eslint-disable-line no-unused-vars
     return other;
   });
 }
