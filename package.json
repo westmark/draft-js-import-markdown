@@ -9,11 +9,11 @@
     "typecheck": "flow",
     "prepublish": "npm run build",
     "test": "npm run lint && npm run typecheck && npm run test-src",
-    "test-src": "mocha src/__tests__/*.js src/**/__tests__/*.js"
+    "test-src": "mocha 'src/**/__tests__/*.js'"
   },
   "dependencies": {
-    "draft-js-import-element": "^0.2.0",
-    "synthetic-dom": "^0.1.4"
+    "draft-js-import-element": "^0.4.0",
+    "synthetic-dom": "^0.2.0"
   },
   "peerDependencies": {
     "draft-js": ">=0.5.0",
@@ -28,13 +28,13 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
     "draft-js-import-element": "^0.3.2",
-    "eslint": "^3.7.1",
+    "eslint": "^3.8.0",
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-flow-vars": "^0.5.0",
-    "eslint-plugin-react": "^6.3.0",
+    "eslint-plugin-react": "^6.4.1",
     "expect": "^1.20.1",
     "flow-bin": "^0.32.0",
-    "mocha": "^3.1.0",
+    "mocha": "^3.1.2",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
   },
