@@ -604,7 +604,7 @@ function Renderer(options) {
 Renderer.prototype.code = function(childNode, lang) {
   var attributes = [];
   if (lang) {
-    attributes.push(['class', this.options.langPrefix + lang]);
+    attributes.push({name: 'class', value: this.options.langPrefix + lang});
   }
   var codeNode = new ElementNode('code', attributes, [childNode]);
   return new ElementNode('pre', [], [codeNode]);
