@@ -661,23 +661,23 @@ Renderer.prototype.ins = function(childNode) {
 
 Renderer.prototype.link = function(href, title, childNode) {
   var attributes = [
-    ['href', href],
+    { name: 'href', value: href },
   ];
   if (title) {
-    attributes.push(['title', title]);
+    attributes.push({ name: 'title', value: title });
   }
   return new ElementNode('a', attributes, [childNode]);
 };
 
 Renderer.prototype.image = function(href, title, alt) {
   var attributes = [
-    ['src', href],
+    { name: 'src', value: href },
   ];
   if (title) {
-    attributes.push(['title', title]);
+    attributes.push({ name: 'title', value: title });
   }
   if (alt) {
-    attributes.push(['alt', alt]);
+    attributes.push({ name: 'alt', value: alt });
   }
   return new ElementNode('img', attributes, SELF_CLOSING);
 };
